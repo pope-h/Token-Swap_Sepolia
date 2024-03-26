@@ -11,25 +11,18 @@ contract TokenSwap {
     AggregatorV3Interface internal priceFeedDAI;
 
     // ERC20 token interfaces for ETH, LINK, and DAI
-    IERC20 public tokenETH;
-    IERC20 public tokenLINK;
-    IERC20 public tokenDAI;
+    IERC20 tokenWETH;
+    IERC20 tokenLINK;
+    IERC20 tokenDAI;
 
     // Constructor with the Chainlink Price Feed addresses and ERC20 token addresses
-    constructor(
-        address _priceFeedETH,
-        address _priceFeedLINK,
-        address _priceFeedDAI,
-        address _tokenETH,
-        address _tokenLINK,
-        address _tokenDAI
-    ) {
-        priceFeedETH = AggregatorV3Interface(_priceFeedETH);
-        priceFeedLINK = AggregatorV3Interface(_priceFeedLINK);
-        priceFeedDAI = AggregatorV3Interface(_priceFeedDAI);
-        tokenETH = IERC20(_tokenETH);
-        tokenLINK = IERC20(_tokenLINK);
-        tokenDAI = IERC20(_tokenDAI);
+    constructor() {
+        priceFeedETH = AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);
+        priceFeedLINK = AggregatorV3Interface(0xc59E3633BAAC79493d908e63626716e204A45EdF);
+        priceFeedDAI = AggregatorV3Interface(0x14866185B1962B63C3Ea9E03Bc1da838bab34C19);
+        tokenWETH = IERC20(0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9);
+        tokenLINK = IERC20(0x779877A7B0D9E8603169DdbD7836e478b4624789);
+        tokenDAI = IERC20(0x3e622317f8C93f7328350cF0B56d9eD4C620C5d6);
     }
 
     // Function to get the latest price of a token using Chainlink Price Feed
@@ -46,7 +39,7 @@ contract TokenSwap {
         // Calculate the amount of LINK to send back
         uint256 amountLINK = (amountETH * priceETH) / priceLINK;
 
-        require(tokenETH.transferFrom(msg.sender, address(this), amountETH), "Transfer of ETH failed");
+        require(tokenWETH.transferFrom(msg.sender, address(this), amountETH), "Transfer of ETH failed");
         require(tokenLINK.transfer(msg.sender, amountLINK), "Transfer of LINK failed");
     }
 
@@ -58,7 +51,7 @@ contract TokenSwap {
         // Calculate the amount of DAI to send back
         uint256 amountDAI = (amountETH * priceETH) / priceDAI;
 
-        require(tokenETH.transferFrom(msg.sender, address(this), amountETH), "Transfer of ETH failed");
+        require(tokenWETH.transferFrom(msg.sender, address(this), amountETH), "Transfer of ETH failed");
         require(tokenDAI.transfer(msg.sender, amountDAI), "Transfer of DAI failed");
     }
 

@@ -5,6 +5,9 @@ libs = ["lib"]
 
 [profile.networks.forked-sepolia]
 type = "forked"
-url = "https://eth-sepolia.g.alchemy.com/v2/2L8rIM6Q5Z4tyBCHsPRgC22Fx-JVA4T0"
+
+[profile.ethereum]
+network = "sepolia"
+account = "0xb7B943fFbA78e33589971e630AD6EB544252D88C"
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

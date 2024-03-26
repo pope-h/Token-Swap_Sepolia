@@ -64,3 +64,5 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+## Sepolia Deployment
+- contract `0x5B94779793CaB5d134870dA8480004B5482a83d6` deployed and verified on sepolia
