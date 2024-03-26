@@ -11,6 +11,10 @@ contract TokenSwapTest is Test {
     IERC20 tokenLINK;
     IERC20 tokenDAI;
 
+    address ETHAccount = address(0x477b144FbB1cE15554927587f18a27b241126FBC);    
+    address DAIAccount = address(0xe902aC65D282829C7a0c42CAe165D3eE33482b9f);
+    address LINKAccount = address(0x6a37809BdFC0aC7b73355E82c1284333159bc5F0);
+
     function setUp() public {
 
         tokenSwap = new TokenSwap();
@@ -25,16 +29,36 @@ contract TokenSwapTest is Test {
         console.log("Contract deployed to: ", address(tokenSwap));
     }
 
-    // function testSwapETHForLINK() public {
-    //     uint256 initialBalance = tokenLINK.balanceOf(address(this));
+    function testSwapETHForLINK() public {
+        switchSigner(LINKAccount);
+        uint256 initialBalance = tokenLINK.balanceOf(address(this));
+        console.log("Initial LINK balance: ", initialBalance);
 
-    //     // Approve the TokenSwap contract to spend ETH
-    //     tokenETH.approve(address(tokenSwap), 1 ether);
+        // Approve the TokenSwap contract to spend ETH
+        tokenETH.approve(address(tokenSwap), 1 ether);
 
-    //     // Call the swap function
-    //     tokenSwap.swapETHForLINK(1 ether);
+        // Call the swap function
+        tokenSwap.swapETHForLINK(1 ether);
 
-    //     // Check that the LINK balance increased
-    //     assertEq(tokenLINK.balanceOf(address(this)), initialBalance + 1   ether);
-    // }
+        // Check that the LINK balance increased
+        assertEq(tokenLINK.balanceOf(address(this)), initialBalance + 1   ether);
+    }
+
+    function mkaddr(string memory name) public returns (address) {
+        address addr = address(
+            uint160(uint256(keccak256(abi.encodePacked(name))))
+        );
+        vm.label(addr, name);
+        return addr;
+    }
+
+    function switchSigner(address _newSigner) public {
+        address foundrySigner = 0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38;
+        if (msg.sender == foundrySigner) {
+            vm.startPrank(_newSigner);
+        } else {
+            vm.stopPrank();
+            vm.startPrank(_newSigner);
+        }
+    }
 }

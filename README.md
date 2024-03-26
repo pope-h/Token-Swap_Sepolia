@@ -65,4 +65,5 @@ $ anvil --help
 $ cast --help
 ```
 ## Sepolia Deployment
-- contract `0x5B94779793CaB5d134870dA8480004B5482a83d6` deployed and verified on sepolia
+- Account 0xb7B943fFbA78e33589971e630AD6EB544252D88C
+- Contract deployed to:  0xAD96bEDEf5D193164582922db943604298cB65aA and verified

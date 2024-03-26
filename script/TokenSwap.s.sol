@@ -5,6 +5,14 @@ import {Script, console} from "forge-std/Script.sol";
 import {console} from "forge-std/console.sol";
 import "../contracts/TokenSwap.sol";
 
+contract TSwap is TokenSwap {
+    constructor() {}
+
+    function getLatestPrice(AggregatorV3Interface priceFeed) external view {
+        _getLatestPrice(priceFeed);
+    }
+}
+
 contract TokenSwapScript is Script {
     function setUp() public {}
 
@@ -18,7 +26,6 @@ contract TokenSwapScript is Script {
         vm.startBroadcast(private_key);
 
         TokenSwap tokenSwap = new TokenSwap();
-        // tokenSwap.swapETHForLINK(1 ether);
         console.log("Contract deployed to: ", address(tokenSwap));
 
         vm.stopBroadcast();

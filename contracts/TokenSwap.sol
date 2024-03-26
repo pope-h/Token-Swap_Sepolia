@@ -26,15 +26,15 @@ contract TokenSwap {
     }
 
     // Function to get the latest price of a token using Chainlink Price Feed
-    function getLatestPrice(AggregatorV3Interface priceFeed) internal view returns (uint256) {
+    function _getLatestPrice(AggregatorV3Interface priceFeed) internal view returns (uint256) {
         (, int256 price,,,) = priceFeed.latestRoundData();
         return uint256(price);
     }
 
     // Swap function for ETH to LINK using Chainlink Price Feeds
     function swapETHForLINK(uint256 amountETH) public {
-        uint256 priceETH = getLatestPrice(priceFeedETH);
-        uint256 priceLINK = getLatestPrice(priceFeedLINK);
+        uint256 priceETH = _getLatestPrice(priceFeedETH);
+        uint256 priceLINK = _getLatestPrice(priceFeedLINK);
 
         // Calculate the amount of LINK to send back
         uint256 amountLINK = (amountETH * priceETH) / priceLINK;
@@ -45,8 +45,8 @@ contract TokenSwap {
 
     // Swap function for ETH to DAI using Chainlink Price Feeds
     function swapETHForDAI(uint256 amountETH) public {
-        uint256 priceETH = getLatestPrice(priceFeedETH);
-        uint256 priceDAI = getLatestPrice(priceFeedDAI);
+        uint256 priceETH = _getLatestPrice(priceFeedETH);
+        uint256 priceDAI = _getLatestPrice(priceFeedDAI);
 
         // Calculate the amount of DAI to send back
         uint256 amountDAI = (amountETH * priceETH) / priceDAI;
