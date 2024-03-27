@@ -51,6 +51,11 @@ $ anvil
 $ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
 
+### Test on Sepolia Testnet
+```shell
+$ forge test --rpc-url <your_rpc_url> --evm-version cancun -vvvvv
+```
+
 ### Cast
 
 ```shell
@@ -66,4 +71,5 @@ $ cast --help
 ```
 ## Sepolia Deployment
 - Account 0xb7B943fFbA78e33589971e630AD6EB544252D88C
-- Contract deployed to:  0xAD96bEDEf5D193164582922db943604298cB65aA and verified
+- Contract deployed to:  0x99bac3245A3294717dD8a846C7DD58BE6AA0a531 and verified
+- URL: https://sepolia.etherscan.io/address/0x99bac3245a3294717dd8a846c7dd58be6aa0a531

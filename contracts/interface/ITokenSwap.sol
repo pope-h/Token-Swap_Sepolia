@@ -7,4 +7,12 @@ interface ITokenSwap {
 
     // Swap function for ETH to DAI using Chainlink Price Feeds
     function swapETHForDAI(uint256 amountETH) external;
+
+    function swapLINKForDAI(uint256 amountLINK) external;
+
+    function swapDAIForLINK(uint256 amountDAI)external;
+
+    function swapLINKForETH(uint256 amountLINK) external;
+
+    function swapDAIForETH(uint256 amountDAI) external;
 }
